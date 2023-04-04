@@ -1,0 +1,70 @@
+<script>
+var offset=0;
+var arrayindex = 0;
+var x=" samanamir ";
+var escapeav=false;
+var lastoffset = 0;
+var m=[];
+var y;
+var number=(x.split("%").length - 1);
+for(var z=0;z<=number;z++)
+{
+    if(z === number)
+    {
+        console.log("in last offset");
+
+        m[arrayindex] = x.substring(offset,x.length);
+        console.log(offset)
+        break;
+    }
+    y = x.indexOf("%" ,offset);
+    escapecheck:
+        if(x.substring(y-1, y) === "/")
+        {
+            escapeav = true;
+            console.log(offset);
+            lastoffset = offset;
+            offset = y + 1;
+            console.log("escapefound");
+            console.log(offset);
+            y = x.indexOf("%",offset);
+            z++;
+            break escapecheck;
+        }
+    if(escapeav === true)
+    {
+        if(y === -1)
+        {
+            console.log(lastoffset);
+            console.log("in escapeav ly");
+            m[arrayindex]=x.substring(lastoffset, x.length);
+            console.log(offset)
+            break;
+        }
+        console.log("in escapeav");
+        m[arrayindex]=x.substring(lastoffset, y);
+        lastoffset = offset
+        offset = y + 1;
+        console.log(offset)
+        arrayindex++;
+        escapeav = false;
+        continue
+    }
+    console.log("no escape");
+    console.log(offset);
+    m[arrayindex] = x.substring(offset,y);
+    lastoffset=offset
+    offset = y+1;
+    console.log(offset)
+    arrayindex++;
+}
+// for(let i = 0; i <= m.length - 1; i++)
+// {
+//     m[i] = clean(m[i]);
+// }
+// function clean(value)
+// {
+//     return 1;
+// }
+console.log(m);
+</script>
